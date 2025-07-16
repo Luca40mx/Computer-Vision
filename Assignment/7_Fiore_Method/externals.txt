@@ -1,0 +1,4 @@
+### 3DFZephyr Externals Camera Parameters
+### ImageName x y z a1 a2 a3
+### First Axis of Rotation X, Second Axis of Rotation Y, Third Axis of Rotation Z
+"cav.jpg" -2.999414 -7.599877 10.611480 90.937230 -9.224851 0.081920
