@@ -1,21 +1,18 @@
 %% My Stereo Rectification Implementation
 % Alternative implementation of stereo camera rectification
 % This code achieves the same results as the original code of the prof but with different
-% algorithmic approaches and optimizations
+% algorithmic approaches
 
 clear; clc; close all;
 
-% Load calibration data and images
 stereo_calib = load('calib/Calib_Results_stereo.mat');
 left_calib = load('calib/Calib_Results_left.mat');
 right_calib = load('calib/Calib_Results_right.mat');
 
-% Load test images
 left_img = imread('Scacchiera/left01.jpg');
 right_img = imread('Scacchiera/right01.jpg');
 
-% Extract key parameters using different variable names
-world_points = stereo_calib.X_left_1; % 3D calibration points
+world_points = stereo_calib.X_left_1;
 num_points = size(world_points, 2);
 
 % Camera intrinsic matrices
@@ -31,15 +28,12 @@ T_left_ext = stereo_calib.Tc_left_1;
 
 % Step 1: Compute camera centers using alternative method
 
-% Build full projection matrices
 P_left_full = compute_projection_matrix(K_left, eye(3), zeros(3, 1));
 P_right_full = compute_projection_matrix(K_right, R_stereo, T_stereo);
 
-% Apply extrinsic transformation
 extrinsic_transform = [R_left_ext, T_left_ext; 0 0 0 1];
 world_points_cam = extrinsic_transform * [world_points; ones(1, num_points)];
 
-% Project points to both cameras
 left_projections = P_left_full * world_points_cam;
 right_projections = P_right_full * world_points_cam;
 
@@ -47,13 +41,13 @@ right_projections = P_right_full * world_points_cam;
 left_pixels = dehomogenize_points(left_projections);
 right_pixels = dehomogenize_points(right_projections);
 
-% Extract camera matrices for rectification
+%  matrices for rectification
 Q_left = P_left_full(:, 1:3);
 Q_right = P_right_full(:, 1:3);
 q_left = P_left_full(:, 4);
 q_right = P_right_full(:, 4);
 
-% Compute optical centers
+% optical centers
 center_left = compute_camera_center(Q_left, q_left);
 center_right = compute_camera_center(Q_right, q_right);
 
@@ -70,7 +64,6 @@ temp_y = cross(original_z_axis, new_x);
 new_y = temp_y / norm(temp_y);
 new_z = cross(new_x, new_y);
 
-% Construct rectification rotation matrix
 R_rect = [new_x'; new_y'; new_z'];
 
 % Step 3: Create rectified projection matrices
@@ -93,7 +86,6 @@ right_rectified = apply_image_transform(right_img, H_right);
 
 % Step 6: Transform calibration points
 
-% Apply homographies to projected points
 left_rect_points = apply_point_transform(left_projections, H_left);
 right_rect_points = apply_point_transform(right_projections, H_right);
 
@@ -142,7 +134,7 @@ function R = my_rodrigues_conversion(rotation_vector)
     k = rotation_vector / theta; % Unit axis
     K = [0, -k(3), k(2); k(3), 0, -k(1); -k(2), k(1), 0]; % Skew-symmetric matrix
 
-    % Rodrigues formula: R = I + sin(θ)K + (1-cos(θ))K²
+    % Rodrigues formula: R = I + sin(theta)K + (1-cos(theta))K²
     R = eye(3) + sin(theta) * K + (1 - cos(theta)) * (K * K);
 end
 
