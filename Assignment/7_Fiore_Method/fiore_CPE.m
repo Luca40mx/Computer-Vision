@@ -1,5 +1,6 @@
 clc; clearvars; close all;
 
+% Caricamento informazioni camera
 load('imgInfo.mat');
 
 % Immagine

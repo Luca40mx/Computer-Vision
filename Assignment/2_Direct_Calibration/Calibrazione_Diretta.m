@@ -2,9 +2,11 @@ clearvars
 close
 clc
 
+% carica immagine del cubo
 calib_img = imread("cubo_rubik.jpg");
 image = rgb2gray(calib_img);
 
+% Visualizza immagine del cubo
 imshow(image);
 title("Click 6 points!")
 hold on;

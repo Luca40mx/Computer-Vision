@@ -1,10 +1,9 @@
 clc; clearvars; close all;
 
-% image1 = imread('lab1.png');
-% image2 = imread('lab2.png');
+image1 = imread('basecamp1.jpg');
+image2 = imread('basecamp2.jpg');
 
-image1 = imread('image1.png');
-image2 = imread('image2.png');
+
 
 gray1 = im2gray(image1);
 points1 = detectSIFTFeatures(gray1);
@@ -57,7 +56,7 @@ imshowpair(image2, image_fixed, a, b, "blend", "Scaling", "joint");
 
 %% Color blending
 
-% STEP 1: We need to find the output bounds that contain both images and
+% STEP 1: We need to find the output bounds that contain both images
 
 [xlimits, ylimits] = outputLimits(tform, [1 size(image1, 2)], [1 size(image1, 1)]);
 

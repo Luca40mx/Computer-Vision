@@ -1,13 +1,16 @@
 clc; clearvars; close all;
 
+% Load calibration points
 load('calibrationChessboard.mat');
 
+% Load chessboard image
 img = imread('chessboard.jpg');
 
-figure(40);
+figure('Name', 'Smooth Chessboard Points Animation', 'Position', [100, 100, 800, 600]);
 
 imshow(img);
 hold on;
+title('Animation', 'FontSize', 14);
 
 h_ball = plot(points(1, 1), points(1, 2), 'o', 'MarkerSize', 10, 'Color', 'red', 'MarkerFaceColor', 'red');
 
