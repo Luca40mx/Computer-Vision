@@ -45,7 +45,7 @@ showMatchedFeatures(image2, image3, matchPoints2_for3, matchPoints3, "montage");
 title('Matches between Image 2 and Image 3');
 
 %% RANSAC for image1-image2
-[tform12, inlierIdx12] = estgeotform2d(matchPoints1, matchPoints2, "projective");
+[tform12, inlierIdx12] = estgeotform2d(matchPoints1, matchPoints2, "projective", "MaxNumTrials", 10000, "Confidence", 99.9);
 inliers1 = matchPoints1(inlierIdx12, :);
 inliers2 = matchPoints2(inlierIdx12, :);
 figure(3);

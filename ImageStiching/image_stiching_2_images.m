@@ -3,8 +3,8 @@ clc; clearvars; close all;
 % image1 = imread('lab1.png');
 % image2 = imread('lab2.png');
 
-image1 = imread('aarhus1.jpg');
-image2 = imread('aarhus2.jpg');
+image1 = imread('basecamp1.jpg');
+image2 = imread('basecamp2.jpg');
 
 gray1 = im2gray(image1);
 points1 = detectSIFTFeatures(gray1);
@@ -25,7 +25,7 @@ matchPoints2 = validPoints2(indices(:, 2));
 showMatchedFeatures(image1, image2, matchPoints1, matchPoints2, "montage");
 
 %% RANSAC
-[tform, inlierIdx] = estgeotform2d(matchPoints1, matchPoints2, "projective");
+[tform, inlierIdx] = estgeotform2d(matchPoints1, matchPoints2, "projective", "MaxNumTrials", 10000, "Confidence", 99.9);
 inliers1 = matchPoints1(inlierIdx, :);
 inliers2 = matchPoints2(inlierIdx, :);
 figure(4);
