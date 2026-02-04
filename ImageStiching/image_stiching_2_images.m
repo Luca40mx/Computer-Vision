@@ -1,10 +1,13 @@
 clc; clearvars; close all;
 
-% image1 = imread('lab1.png');
-% image2 = imread('lab2.png');
+% image1 = imread('datasets/pair_images/basecamp1.jpg');
+% image2 = imread('datasets/pair_images/basecamp2.jpg');
 
-image1 = imread('basecamp1.jpg');
-image2 = imread('basecamp2.jpg');
+% image1 = imread('datasets/pair_images/lab1.png');
+% image2 = imread('datasets/pair_images/lab2.png');
+
+image1 = imread('datasets/pair_images/image1.png');
+image2 = imread('datasets/pair_images/image2.png');
 
 gray1 = im2gray(image1);
 points1 = detectSIFTFeatures(gray1);

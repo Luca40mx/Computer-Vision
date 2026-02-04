@@ -1,13 +1,8 @@
 clc; clearvars; close all;
 
-% Load three images for stitching
-% image1 = imread('lab1.png');
-% image2 = imread('lab2.png');
-% image3 = imread('lab3.png');
-
-image1 = imread('aarhus1.jpg');
-image2 = imread('aarhus2.jpg');
-image3 = imread('aarhus3.jpg');
+image1 = imread('datasets/triple_images/aarhus1.jpg');
+image2 = imread('datasets/triple_images/aarhus2.jpg');
+image3 = imread('datasets/triple_images/aarhus3.jpg');
 
 % Detect features in all three images
 gray1 = im2gray(image1);
